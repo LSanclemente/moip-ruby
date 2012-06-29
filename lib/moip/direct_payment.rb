@@ -59,7 +59,7 @@ module MoIP
 
           # Identificador do tipo de instrução
           xml.EnviarInstrucao {
-            xml.InstrucaoUnica {
+            xml.InstrucaoUnica(:TipoValidacao => "Transparente") {
 
               # Dados da transação
               xml.Razao {
@@ -75,63 +75,63 @@ module MoIP
               }
 
               # Definindo o pagamento direto
-              xml.PagamentoDireto {
-                xml.Forma {
-                  xml.text attributes[:forma]
-                }
+              # xml.PagamentoDireto {
+              #   xml.Forma {
+              #     xml.text attributes[:forma]
+              #   }
 
-                # Débito Bancário
-                if ["DebitoBancario"].include?(attributes[:forma])
-                  xml.Instituicao {
-                    xml.text attributes[:instituicao]
-                  }
-                end
+              #   # Débito Bancário
+              #   if ["DebitoBancario"].include?(attributes[:forma])
+              #     xml.Instituicao {
+              #       xml.text attributes[:instituicao]
+              #     }
+              #   end
 
-                # Cartão de Crédito
-                if attributes[:forma] == "CartaoCredito"
-                  xml.Instituicao {
-                    xml.text attributes[:instituicao]
-                  }
-                  xml.CartaoCredito {
-                    xml.Numero {
-                      xml.text attributes[:numero]
-                    }
-                    xml.Expiracao {
-                      xml.text attributes[:expiracao]
-                    }
-                    xml.CodigoSeguranca {
-                      xml.text attributes[:codigo_seguranca]
-                    }
-                    xml.Portador {
-                      xml.Nome {
-                        xml.text attributes[:nome]
-                      }
-                      xml.Identidade(:Tipo => "CPF") {
-                        xml.text attributes[:identidade]
-                      }
-                      xml.Telefone {
-                        xml.text attributes[:telefone]
-                      }
-                      xml.DataNascimento {
-                        xml.text attributes[:data_nascimento]
-                      }
-                    }
-                  }
-                  xml.Parcelamento {
-                    xml.Parcelas {
-                      xml.text attributes[:parcelas]
-                    }
-                    xml.Recebimento {
-                      xml.text attributes[:recebimento]
-                    }
-                  }
-                end
-              }
+              #   # Cartão de Crédito
+              #   if attributes[:forma] == "CartaoCredito"
+              #     xml.Instituicao {
+              #       xml.text attributes[:instituicao]
+              #     }
+              #     xml.CartaoCredito {
+              #       xml.Numero {
+              #         xml.text attributes[:numero]
+              #       }
+              #       xml.Expiracao {
+              #         xml.text attributes[:expiracao]
+              #       }
+              #       xml.CodigoSeguranca {
+              #         xml.text attributes[:codigo_seguranca]
+              #       }
+              #       xml.Portador {
+              #         xml.Nome {
+              #           xml.text attributes[:nome]
+              #         }
+              #         xml.Identidade(:Tipo => "CPF") {
+              #           xml.text attributes[:identidade]
+              #         }
+              #         xml.Telefone {
+              #           xml.text attributes[:telefone]
+              #         }
+              #         xml.DataNascimento {
+              #           xml.text attributes[:data_nascimento]
+              #         }
+              #       }
+              #     }
+              #     xml.Parcelamento {
+              #       xml.Parcelas {
+              #         xml.text attributes[:parcelas]
+              #       }
+              #       xml.Recebimento {
+              #         xml.text attributes[:recebimento]
+              #       }
+              #     }
+              #   end
+              # }
 
               # Dados do pagador
               xml.Pagador {
                 xml.Nome { xml.text attributes[:pagador][:nome] }
-                xml.LoginMoIP { xml.text attributes[:pagador][:login_moip] }
+                # xml.LoginMoIP { xml.text attributes[:pagador][:login_moip] }
                 xml.Email { xml.text attributes[:pagador][:email] }
                 xml.TelefoneCelular { xml.text attributes[:pagador][:tel_cel] }
                 xml.Apelido { xml.text attributes[:pagador][:apelido] }
